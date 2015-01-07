@@ -13,6 +13,7 @@ class MiniTest::Test
       config.http_proxy = nil
     end
 
+    WebMock.disable_net_connect!(allow: "codeclimate.com")
     stub_request(:any, "#{DNSimpler.base_uri}v1/domains").to_return(status: 200, body: [{domain: {id: 707}}, {domain: {id: 708}}].to_json)
   end
 
