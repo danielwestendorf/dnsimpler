@@ -1,6 +1,7 @@
 # Dnsimpler
+[![TravisCI](https://travis-ci.org/danielwestendorf/dnsimpler.svg)](https://travis-ci.org/danielwestendorf/dnsimpler)[![Code Climate](https://codeclimate.com/github/danielwestendorf/dnsimpler/badges/gpa.svg)](https://codeclimate.com/github/danielwestendorf/dnsimpler)[![Test Coverage](https://codeclimate.com/github/danielwestendorf/dnsimpler/badges/coverage.svg)](https://codeclimate.com/github/danielwestendorf/dnsimpler)
 
-TODO: Write a gem description
+A simple API wrapper for [DNSimple](https://dnsimple.com). Always returns the full response. Requires you to use the [API documentation](https://developer.dnsimple.com).
 
 ## Installation
 
@@ -20,7 +21,34 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Configure the gem
+```ruby
+DNSimpler.setup do |config|
+    config.username = "bob@example.com"
+    config.token = "DNSIMPLE_API_TOKEN"
+    config.base_uri = "https://api.dnsimple.com" # For testing you can use the sandbox
+    config.debug = false
+    config.proxy = {addr: 'http://example.com', port: 8080, user: 'bob', pass: 'password'}
+end
+```
+
+Make your API calls.
+```ruby
+domains_response = DNSimpler.get('v1/domains')
+p domains_response.code
+=> 200
+p domains_response.body
+[ { domain: { ... } }, { domain: { ... } } ]
+```
+
+Some API calls require parameters. Just pass them as a hash
+```ruby
+registration = DNSimpler.post('v1/domain_registrations', domain: {name: 'example.com', registrant_id: 1234})
+p registration.code
+=> 201
+p domains_response.body
+{ domain: { name: 'example.com', .... } }
+```
 
 ## Contributing
 
