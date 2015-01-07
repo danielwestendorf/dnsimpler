@@ -1,6 +1,7 @@
 require 'ostruct'
 require "dnsimpler/version"
 require 'dnsimpler/http'
+require 'dnsimpler/try'
 
 module DNSimpler
   MATTRS = %w[username token base_uri debug]
