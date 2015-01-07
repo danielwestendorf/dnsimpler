@@ -2,7 +2,7 @@ unless Hash.instance_methods.include? :try
   class Hash
 
     def try(key)
-      return send("[]", key)
+      return self[key]
     end
 
   end
