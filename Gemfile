@@ -5,7 +5,7 @@ gemspec
 
 group :development do
   gem 'minitest'
-  gem 'guard'
+  gem 'guard', "2.10.0"
   gem 'guard-minitest'
 end
 
