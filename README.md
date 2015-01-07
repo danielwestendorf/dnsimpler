@@ -1,5 +1,5 @@
 # Dnsimpler
-[![TravisCI](https://travis-ci.org/danielwestendorf/dnsimpler.svg)](https://travis-ci.org/danielwestendorf/dnsimpler)[![Code Climate](https://codeclimate.com/github/danielwestendorf/dnsimpler/badges/gpa.svg)](https://codeclimate.com/github/danielwestendorf/dnsimpler)[![Test Coverage](https://codeclimate.com/github/danielwestendorf/dnsimpler/badges/coverage.svg)](https://codeclimate.com/github/danielwestendorf/dnsimpler)
+[![TravisCI](https://travis-ci.org/danielwestendorf/dnsimpler.svg)](https://travis-ci.org/danielwestendorf/dnsimpler) [![Code Climate](https://codeclimate.com/github/danielwestendorf/dnsimpler/badges/gpa.svg)](https://codeclimate.com/github/danielwestendorf/dnsimpler) [![Test Coverage](https://codeclimate.com/github/danielwestendorf/dnsimpler/badges/coverage.svg)](https://codeclimate.com/github/danielwestendorf/dnsimpler)
 
 A simple API wrapper for [DNSimple](https://dnsimple.com). Always returns the full response. Requires you to use the [API documentation](https://developer.dnsimple.com).
 
