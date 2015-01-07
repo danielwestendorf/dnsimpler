@@ -23,17 +23,29 @@ module DNSimpler
         opts[:http_proxy_pass] = proxy[:pass]
       end
 
-      opts
+      puts "Base Options: #{opts}" if DNSimpler.debug
+
+      return opts
     end
 
     %w[get post head delete patch put].each do |method|
-      class_eval <<-RUBY_EVAL
+      class_eval <<-RUBY_EVAL, __FILE__, __LINE__
 
-        def self.#{method}(path, options = {}, &blk)
-          instance_opts = self.base_options.merge(options)
-          response = super(path, instance_opts, &blk)
+        def self.#{method}(path, opts = {}, &blk)
+          opts = {body: opts}
+          opts.merge!(self.base_options)
 
-          return OpenStruct.new(code: response.code, body: response.parsed_response)
+          req = super path, opts, &blk
+
+          response = OpenStruct.new(code: req.code, body: req.parsed_response)
+
+          if DNSimpler.debug
+            response.request = req
+
+            puts "Request Options: " + opts.to_s
+          end
+
+          return response
         end
 
       RUBY_EVAL

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class DNSimplerTest < MiniTest::Test
-  CONFIGS = %w[username token base_uri]
+  CONFIGS = %w[username token base_uri debug]
 
   CONFIGS.each do |config|
     class_eval <<-RUBY_EVAL, __FILE__, __LINE__

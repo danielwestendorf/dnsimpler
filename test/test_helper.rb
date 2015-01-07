@@ -11,6 +11,7 @@ class MiniTest::Test
     DNSimpler.setup do |config|
       config.base_uri = "https://api.sandbox.dnsimple.com/"
       config.http_proxy = nil
+      config.debug = false
     end
 
     WebMock.disable_net_connect!(allow: "codeclimate.com")

@@ -3,7 +3,7 @@ require "dnsimpler/version"
 require 'dnsimpler/http'
 
 module DNSimpler
-  MATTRS = %w[username token base_uri]
+  MATTRS = %w[username token base_uri debug]
 
   MATTRS.each do |mattr|
     module_eval <<-RUBY_EVAL, __FILE__, __LINE__
@@ -11,6 +11,9 @@ module DNSimpler
       def self.#{mattr}=(attr); @@#{mattr} = attr; end;
     RUBY_EVAL
   end
+
+  # Debuggin is off by default
+  @@debug = false
 
   # API username
   @@username = ''
@@ -47,7 +50,7 @@ module DNSimpler
 
   # Delegate the class methods to the HTTP class
   %w[get post head delete patch put].each do |method|
-    module_eval <<-RUBY_EVAL
+    module_eval <<-RUBY_EVAL, __FILE__, __LINE__
 
       def self.#{method}(path, options = {}, &blk)
         HTTP.#{method}(path, options, &blk)
