@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = DNSimpler::VERSION
   spec.authors       = ["Daniel Westendorf"]
   spec.email         = ["daniel@prowestech.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{A simple DNSimple API wrapper that always provides the response you're looking for.}
+  spec.description   = %q{dnsimple-ruby is too opinionated on how to use its method calls. We're all capable devs, righ? Let's just use the API like a developer would.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
