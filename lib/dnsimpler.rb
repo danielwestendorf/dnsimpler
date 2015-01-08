@@ -1,6 +1,7 @@
 require 'ostruct'
 require "dnsimpler/version"
 require 'dnsimpler/http'
+require 'dnsimpler/error'
 require 'dnsimpler/try'
 
 module DNSimpler

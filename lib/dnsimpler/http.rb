@@ -37,15 +37,19 @@ module DNSimpler
 
           req = super path, opts, &blk
 
-          response = OpenStruct.new(code: req.code, body: req.parsed_response)
+          if (200...400).include? req.code
+            response = OpenStruct.new(code: req.code, body: req.parsed_response)
 
-          if DNSimpler.debug
-            response.request = req
+            if DNSimpler.debug
+              response.request = req
 
-            puts "Request Options: " + opts.to_s
+              puts "Request Options: " + opts.to_s
+            end
+
+            return response
+          else
+            raise Error.new(req.code, req.parsed_response, req)
           end
-
-          return response
         end
 
       RUBY_EVAL
