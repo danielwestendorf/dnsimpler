@@ -23,7 +23,7 @@ module DNSimpler
         opts[:http_proxy_pass] = proxy[:pass]
       end
 
-      puts "Base Options: #{opts}" if DNSimpler.debug
+      $stdout.puts "Base Options: #{opts}" if DNSimpler.debug
 
       return opts
     end
@@ -43,7 +43,7 @@ module DNSimpler
             if DNSimpler.debug
               response.request = req
 
-              puts "Request Options: " + opts.to_s
+              $stdout.puts "Request Options: #{opts.inspect}" 
             end
 
             return response
