@@ -20,7 +20,7 @@ module DNSimpler
   # API username
   @@username = ''
 
-  # API token
+  # OAuth Token - v2 api
   @@token = ''
 
   # URI for the requests. Defaults to https://api.dnsimple.com/

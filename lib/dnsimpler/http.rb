@@ -11,7 +11,7 @@ module DNSimpler
         headers: {
           'Accept' => 'application/json',
           'User-Agent' => "dnsimpler/#{DNSimpler::VERSION}",
-          'X-DNSimple-Token' => "#{DNSimpler.username}:#{DNSimpler.token}"
+          'Authorization' => "Bearer #{DNSimpler.token}"
         }
       }
 
