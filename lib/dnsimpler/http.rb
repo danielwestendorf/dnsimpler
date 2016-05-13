@@ -48,7 +48,7 @@ module DNSimpler
 
             return response
           else
-            raise Error.new(req.code, req.parsed_response, req)
+            raise Error.new("Request Error"), req
           end
         end
 
