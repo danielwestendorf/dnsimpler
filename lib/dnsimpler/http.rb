@@ -38,7 +38,8 @@ module DNSimpler
           req = super path, opts, &blk
 
           if (200...400).include? req.code
-            response = OpenStruct.new(code: req.code, body: req.parsed_response)
+            puts req
+            response = OpenStruct.new(code: req.code, body: req.parsed_response["data"])
 
             if DNSimpler.debug
               response.request = req
@@ -48,7 +49,7 @@ module DNSimpler
 
             return response
           else
-            raise Error.new("Request Error"), req
+            raise Error.new(req.code, req.parsed_response, req)
           end
         end
 
