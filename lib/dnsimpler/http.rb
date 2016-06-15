@@ -36,9 +36,8 @@ module DNSimpler
           opts.merge!(self.base_options)
 
           req = super path, opts, &blk
-
           if (200...400).include? req.code
-            response = OpenStruct.new(code: req.code, body: req.parsed_response["data"])
+            response = OpenStruct.new(code: req.code, body: req.parsed_response.try("data"))
 
             if DNSimpler.debug
               response.request = req
