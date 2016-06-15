@@ -37,7 +37,11 @@ module DNSimpler
 
           req = super path, opts, &blk
           if (200...400).include? req.code
-            response = OpenStruct.new(code: req.code, body: req.parsed_response.try("data"))
+            # httparty can return a nil(ish) object here - https://github.com/jnunemaker/httparty/issues/285
+            # Hash.try gets overriden by activerecord
+            body = req.body.nil? ? nil : req.parsed_response["data"]
+
+            response = OpenStruct.new(code: req.code, body: body)
 
             if DNSimpler.debug
               response.request = req
