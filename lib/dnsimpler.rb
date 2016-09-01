@@ -2,7 +2,6 @@ require 'ostruct'
 require "dnsimpler/version"
 require 'dnsimpler/http'
 require 'dnsimpler/error'
-require 'dnsimpler/try'
 
 module DNSimpler
   MATTRS = %w[username token base_uri debug]
@@ -20,7 +19,7 @@ module DNSimpler
   # API username
   @@username = ''
 
-  # API token
+  # OAuth Token - v2 api
   @@token = ''
 
   # URI for the requests. Defaults to https://api.dnsimple.com/

@@ -11,7 +11,7 @@ module DNSimpler
         headers: {
           'Accept' => 'application/json',
           'User-Agent' => "dnsimpler/#{DNSimpler::VERSION}",
-          'X-DNSimple-Token' => "#{DNSimpler.username}:#{DNSimpler.token}"
+          'Authorization' => "Bearer #{DNSimpler.token}"
         }
       }
 
@@ -36,9 +36,12 @@ module DNSimpler
           opts.merge!(self.base_options)
 
           req = super path, opts, &blk
-
           if (200...400).include? req.code
-            response = OpenStruct.new(code: req.code, body: req.parsed_response)
+            # httparty can return a nil(ish) object here - https://github.com/jnunemaker/httparty/issues/285
+            # Hash.try gets overriden by activerecord
+            body = req.body.nil? ? nil : req.parsed_response["data"]
+
+            response = OpenStruct.new(code: req.code, body: body)
 
             if DNSimpler.debug
               response.request = req

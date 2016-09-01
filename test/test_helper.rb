@@ -10,12 +10,13 @@ class MiniTest::Test
   def setup
     DNSimpler.setup do |config|
       config.base_uri = "https://api.sandbox.dnsimple.com/"
+      config.token = "token-test-string"
       config.http_proxy = nil
       config.debug = false
     end
 
     WebMock.disable_net_connect!(allow: "codeclimate.com")
-    stub_request(:any, "#{DNSimpler.base_uri}v1/domains").to_return(status: 200, body: [{domain: {id: 707}}, {domain: {id: 708}}].to_json)
+    stub_request(:any, "#{DNSimpler.base_uri}domains").with(headers: {'Accept' => 'application/json', 'Authorization' => 'Bearer token-test-string', 'User-Agent' => "dnsimpler/#{DNSimpler::VERSION}"}).to_return(status: 200, body: {data: [{domain: {id: 707}}, {domain: {id: 708}}]}.to_json)
   end
 
   # Stolen from rails source cause I like the syntax
