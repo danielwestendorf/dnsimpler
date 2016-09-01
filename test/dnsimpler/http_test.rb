@@ -5,7 +5,7 @@ module DNSimpler
 
     def setup
       super
-      stub_request(:get, "#{DNSimpler.base_uri}v1/domains/example.com").to_return(status: 404, body: {"message"=>"Domain `example.com' not found"}.to_json)
+      stub_request(:get, "#{DNSimpler.base_uri}registrar/domains/example.com/check").with(headers: {'Accept' => 'application/json', 'Authorization' => 'Bearer token-test-string', 'User-Agent' => "dnsimpler/#{DNSimpler::VERSION}"}).to_return(status: 404, body: { data: {"message"=>"Domain `example.com' not found"}}.to_json)
     end
 
     test "#base_options" do
@@ -14,7 +14,7 @@ module DNSimpler
 
     test "an error is raised for a failed request" do
       error = assert_raises ::DNSimpler::Error do
-        HTTP.get("v1/domains/example.com")
+        HTTP.get("/registrar/domains/example.com/check")
       end
 
       refute (200...400).include? error.code
@@ -24,7 +24,7 @@ module DNSimpler
       class_eval <<-RUBY_EVAL
 
         test "#{method}" do
-          response = HTTP.#{method}('v1/domains')
+          response = HTTP.#{method}('/domains')
           assert_instance_of OpenStruct, response
         end
 

@@ -24,9 +24,8 @@ Or install it yourself as:
 Configure the gem
 ```ruby
 DNSimpler.setup do |config|
-    config.username = "bob@example.com"
     config.token = "DNSIMPLE_API_TOKEN"
-    config.base_uri = "https://api.dnsimple.com" # For testing you can use the sandbox
+    config.base_uri = "https://api.dnsimple.com/" # For testing you can use the sandbox
     config.debug = false
     config.proxy = {addr: 'http://example.com', port: 8080, user: 'bob', pass: 'password'}
 end
@@ -34,7 +33,7 @@ end
 
 Make your API calls.
 ```ruby
-domains_response = DNSimpler.get('v1/domains')
+domains_response = DNSimpler.get('domains')
 p domains_response.code
 => 200
 p domains_response.body
@@ -43,7 +42,7 @@ p domains_response.body
 
 Some API calls require parameters. Just pass them as a hash
 ```ruby
-registration = DNSimpler.post('v1/domain_registrations', domain: {name: 'example.com', registrant_id: 1234})
+registration = DNSimpler.post('domains/registrar/example.com/register', {registrant_id: 1234})
 p registration.code
 => 201
 p domains_response.body

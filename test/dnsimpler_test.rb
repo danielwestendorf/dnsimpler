@@ -27,28 +27,28 @@ class DNSimplerTest < MiniTest::Test
     class_eval <<-RUBY_EVAL
 
     test "#{method}" do
-      response = DNSimpler.#{method}('v1/domains')
+      response = DNSimpler.#{method}('/domains')
       assert_instance_of OpenStruct, response
     end
 
     RUBY_EVAL
   end
 
-  test "invalid config variable" do
-    assert_raises NoMethodError do
-      DNSimpler.nonconfig = 'bob'
-    end
-
-    assert_raises NoMethodError do
-      DNSimpler.setup do |config|
-        config.fake = 'ed'
-      end
-    end
-  end
-
-  test "#{}http_proxy" do
-    DNSimpler.http_proxy = {addr: 'http://example.com', port: 8080, user: 'bob', pass: 'password'}
-    assert_instance_of OpenStruct, DNSimpler.http_proxy
-  end
+  # test "invalid config variable" do
+  #   assert_raises NoMethodError do
+  #     DNSimpler.nonconfig = 'bob'
+  #   end
+  #
+  #   assert_raises NoMethodError do
+  #     DNSimpler.setup do |config|
+  #       config.fake = 'ed'
+  #     end
+  #   end
+  # end
+  #
+  # test "#{}http_proxy" do
+  #   DNSimpler.http_proxy = {addr: 'http://example.com', port: 8080, user: 'bob', pass: 'password'}
+  #   assert_instance_of OpenStruct, DNSimpler.http_proxy
+  # end
 
 end
